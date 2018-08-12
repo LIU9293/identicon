@@ -14,7 +14,7 @@ app.use(compression())
 
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
-app.get('/identicon/:address', async (req, res) => {
+app.get('/:address', async (req, res) => {
   try {
     const address = req.params.address
     const svg = await icon.svg(address, true)
