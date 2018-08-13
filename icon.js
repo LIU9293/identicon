@@ -101,7 +101,7 @@ const IqonsCatalog = {
 }
 
 class Iqons {
-  static async svg (t, s = !1) {
+  static async svg (t, s = !1, useLagacyColor = false) {
     const e = this._hash(t)
     return this._svgTemplate(
       e[0],
@@ -112,7 +112,8 @@ class Iqons {
       e[9] + e[10],
       e[11],
       e[12],
-      s
+      s,
+      useLagacyColor
     )
   }
 
@@ -146,11 +147,11 @@ class Iqons {
     return (e.style.width = '100%'), (e.style.height = '100%'), e
   }
 
-  static async _svgTemplate (t, s, e, a, n, r, i, c, l) {
-    return this._$svg(await this._$iqons(t, s, e, a, n, r, i, l), c)
+  static async _svgTemplate (t, s, e, a, n, r, i, c, l, useLagacyColor) {
+    return this._$svg(await this._$iqons(t, s, e, a, n, r, i, l, useLagacyColor), c)
   }
 
-  static async _$iqons (t, s, e, a, n, r, i, c) {
+  static async _$iqons (t, s, e, a, n, r, i, c, useLagacyColor) {
     for (
       t = parseInt(t),
       s = parseInt(s),
@@ -159,10 +160,11 @@ class Iqons {
       i === t || i === s;
 
     ) { ++i > 9 && (i = 0) }
+    const colors = useLagacyColor ? this.colors : this.colorsNew
     return (
-      (t = this.colors[t]),
-      (s = this.colors[s]),
-      `<g color="${t}" fill="${(i = this.colors[
+      (t = colors[t]),
+      (s = colors[s]),
+      `<g color="${t}" fill="${(i = colors[
         i
       ])}">\n    <rect fill="${s}" x="0" y="0" width="160" height="160"></rect>\n    <circle cx="80" cy="80" r="40" fill="${t}"></circle>\n    <g opacity=".1" fill="#010101"><path d="M119.21,80a39.46,39.46,0,0,1-67.13,28.13c10.36,2.33,36,3,49.82-14.28,10.39-12.47,8.31-33.23,4.16-43.26A39.35,39.35,0,0,1,119.21,80Z"/></g>\n    ${await this._generatePart(
         'top',
@@ -227,6 +229,21 @@ class Iqons {
       '#f06292',
       '#7cb342',
       '#795548'
+    ]
+  }
+
+  static get colorsNew () {
+    return [
+      '#FFA431',
+      '#F31652',
+      '#FFCB4B',
+      '#324FFF',
+      '#2CCBFF',
+      '#933EFF',
+      '#00C098',
+      '#FF6E9F',
+      '#A3E65C',
+      '#A27261'
     ]
   }
 
