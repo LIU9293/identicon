@@ -17,8 +17,8 @@ app.use('/static', express.static(path.join(__dirname, 'public')))
 app.get('/:address', async (req, res) => {
   try {
     const address = req.params.address
-    const useLagacyColor = !!req.query.useLagacyColor
-    const svg = await icon.svg(address, true, useLagacyColor)
+    const useLegacyColor = !!req.query.useLegacyColor
+    const svg = await icon.svg(address, true, useLegacyColor)
     res.type('svg')
     res.status(200).send(svg)
   } catch (error) {
